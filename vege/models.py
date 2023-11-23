@@ -37,7 +37,7 @@ class Student(models.Model):
     student_address = models.TextField()
 
     def __str__(self) -> str:
-        return self.student_name;
+        return self.student_name, self.student_email, 
 
     class Meta:
         ordering = ['student_name']
