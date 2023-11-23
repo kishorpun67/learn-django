@@ -1,0 +1,4 @@
+
+
+exmaple Studnet.objects.create()
+where objects is model manager

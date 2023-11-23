@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">   
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="receipe_name">Receipe Name </label>
+              <input type="text" class="form-control" id="receipe_name" name="receipe_name" value="{{receipe.receipe_name}}">
+            </div>
+            <div class="form-group">
+              <label for="receipe_description">Receipe Description</label>
+              <textarea name="receipe_description" class="form-control">{{receipe.receipe_description}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="receipe_image">Receipe Image</label>
+                <input type="file" name="receipe_image">
+                <br>
+                <img src="/media/{{receipe.receipe_image}}"  width="200px" height="200px" alt="" srcset="">
+            </div>
+            <button type="submit" class="btn btn-default">Update</button>
+          </form>
+    </div>
+</div>
+{% endblock %}
