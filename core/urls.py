@@ -37,6 +37,9 @@ urlpatterns = [
     path('login/', login_page, name="login"),
     path('register/', register, name="register"),
     path('logout/', logout_page, name="logout"),
+    path('students/', get_students, name="students"),
+    path('see-marks/<student_id>', see_marks, name="see-makrs"),
+
 
 
 
