@@ -56,6 +56,4 @@ Student.objects.values('student_age', 'department').annotate(Count('student_age'
 
 
 
-
-
 ```
