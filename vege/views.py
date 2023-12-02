@@ -102,6 +102,7 @@ def register(request):
 from django.db.models import Q
 def get_students(request):
     students = Student.objects.all()
+    # return HttpResponse(ranks)
     if request.GET.get('search'):
         search = request.GET.GET('search')
         students = students.filter(Q(student_name__icontains=search) | 
@@ -112,9 +113,17 @@ def get_students(request):
     page_number = request.GET.get('page',1)
     students = students.get_page(page_number)
     # return HttpResponse(students)
-    return render(request,'report/student.html', context={'students':students})
+    return render(request,'report/student.html', context={'students':students })
 
 def see_marks(request, student_id):
     marks = SubjectMarks.objects.filter(student__student_id__student_id=student_id)
     totalMarkas = marks.aggregate(marks = Sum('marks'))
-    return render(request, 'report/see_marks.html', context={'marks': marks, 'totalMarkas': totalMarkas})
+    ranks = Student.objects.annotate(marks = Sum('studentmarks__marks')).order_by('-marks')    
+    current_rank = -1;
+    i = 1;
+    for mark in ranks:
+        if student_id == mark.student_id.student_id:
+            current_rank = i
+            break;
+        i = i+1
+    return render(request, 'report/see_marks.html', context={'marks': marks, 'totalMarkas': totalMarkas, 'current_rank':current_rank})
