@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import  *
+from django.utils import timezone
+
 # Create your models here.
 
 
@@ -67,6 +70,18 @@ class SubjectMarks(models.Model):
         unique_together = ['student', 'subject']
 
 
+class ReportCard(models.Model):
+    student = models.ForeignKey(Student, related_name='studentreportcard', on_delete=models.CASCADE)
+    student_rank = models.IntegerField()
+    date_of_report_card_generation = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together =['student_rank', 'date_of_report_card_generation']
+        ordering = ['student_rank']
+
+    def total_marks(self, obj):
+        subject_marks = SubjectMarks.objects.filter(student= obj.student)
+        return obj.aggregate(marks = Sum('marks'))
 
 
 

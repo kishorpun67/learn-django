@@ -40,3 +40,15 @@ def seed_db(n=10)->None:
             student_age = student_age,
             student_address = student_address
         )
+
+def generate_report_card():
+        ranks = Student.objects.annotate(marks = Sum('studentmarks__marks')).order_by('-marks')    
+        current_rank = -1;
+        i = 1;
+        for mark in ranks:
+            ReportCard.objects.create(
+                student = mark,
+                student_rank = i 
+            )
+            i = i+1
+           

@@ -115,7 +115,9 @@ def get_students(request):
     # return HttpResponse(students)
     return render(request,'report/student.html', context={'students':students })
 
+from .seed import *;
 def see_marks(request, student_id):
+    # generate_report_card()
     marks = SubjectMarks.objects.filter(student__student_id__student_id=student_id)
     totalMarkas = marks.aggregate(marks = Sum('marks'))
     ranks = Student.objects.annotate(marks = Sum('studentmarks__marks')).order_by('-marks')    

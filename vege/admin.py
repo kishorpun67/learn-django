@@ -8,6 +8,8 @@ admin.site.register(StudentID)
 admin.site.register(Student)
 admin.site.register(Department)
 admin.site.register(Subject)
+admin.site.register(ReportCard)
+
 # admin.site.register(SubjectMarks)
 
 class SubjectMarkAdmin(admin.ModelAdmin):
