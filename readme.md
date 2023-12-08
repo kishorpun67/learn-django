@@ -1,5 +1,11 @@
 ###Python Django Commnad
 ```python
+#virtaul enviroment setup
+pip install virtualenv
+cd env
+cd Scripts
+activate
+
 # installation  for danjo
 pip install django
 
